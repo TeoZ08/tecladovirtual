@@ -24,18 +24,19 @@
         position: relative;
       }
 
-      body::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+      /* 0. LOGO DA UNAPI */
+      .logo-watermark {
+        width: 100%;
+        max-width: 900px;
+        height: 330px; /* Espaço exato para a imagem não cortar */
         background-image: url("logo-unapi.png");
         background-repeat: no-repeat;
-        background-position: center -4%;
-        background-size: 400px;
-        z-index: -1;
+        background-position: center bottom;
+        background-size: contain;
+        opacity: 0.5; /* Transparência da marca d'água */
+        margin-bottom: -15px; /* Puxa a caixa de texto para cima para encaixar na escrita */
+        z-index: 0;
+        pointer-events: none; /* Garante que não roube o clique do mouse */
       }
 
       /* 1. CAIXA DE TEXTO */
@@ -43,8 +44,8 @@
         width: 100%;
         max-width: 900px;
         margin-bottom: 30px; /* Espaçamento padronizado */
-        margin-top: 120px;
-        z-index: 1;
+        z-index: 2; /* Mantém a caixa na frente da logo */
+        position: relative;
       }
 
       #practice-input {
@@ -301,6 +302,8 @@
     </style>
   </head>
   <body>
+    <div class="logo-watermark"></div>
+
     <div class="input-container">
       <input
         type="text"
