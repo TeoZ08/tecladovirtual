@@ -3,34 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teclado Virtual ABNT2 - Oficina</title>
+    <title>Treino de Teclado - UnAPI UFMS</title>
     <style>
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
+
       body {
         background-color: #1a1a1a;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         padding: 20px;
         overflow: hidden;
+        position: relative; /* Necessário para a imagem de fundo */
       }
+
+      /* --- MARCA D'ÁGUA DA LOGO NO FUNDO --- */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("logo-unapi.png");
+        background-repeat: no-repeat;
+        background-position: center 1%;
+        background-size: 400px; /* Tamanho fixo para encaixar bem atrás da caixa */
+        opacity: 0.5;
+        z-index: -1;
+      }
+
+      /* --- CAIXA DE TEXTO --- */
+      .input-container {
+        width: 100%;
+        max-width: 900px;
+        margin-bottom: 40px;
+        z-index: 1;
+      }
+
+      #practice-input {
+        width: 100%;
+        font-size: 28px;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: #2b2b2b;
+        color: #ffffff;
+        border: solid #c49a29; /* Roxo mais sóbrio da UnAPI */
+        outline: none;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        font-family: monospace; /* Fonte que simula máquina de escrever/código */
+      }
+
+      #practice-input::placeholder {
+        color: #777;
+        font-style: italic;
+      }
+
+      /* --- TECLADO --- */
       .keyboard-board {
         display: flex;
         gap: 15px;
-        background-color: #2b2b2b;
+        background-color: rgba(43, 43, 43, 0.95);
         padding: 20px;
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
         border: 1px solid #3d3d3d;
-        transform: scale(1.3); /* Lente de aumento de 30% */
-        transform-origin: center;
+        transform: scale(1.15);
+        transform-origin: top center;
+        z-index: 1;
       }
+
       .main-block,
       .nav-block,
       .numpad-block {
@@ -42,6 +93,7 @@
         display: flex;
         gap: 5px;
       }
+
       .key {
         background-color: #383838;
         color: #ffffff;
@@ -61,14 +113,19 @@
           border-bottom-width 0.1s;
         user-select: none;
         line-height: 1.2;
+        cursor: pointer;
       }
-      .key.active {
-        background-color: #00ff88;
-        color: #000;
+
+      /* ESTADO ATIVO - Cores opacas, sem brilho/neon */
+      .key.active,
+      .key.caps-on {
+        background-color: #c49a29; /* Amarelo mostarda mais suave/fechado */
+        color: #111; /* Texto escuro para contraste */
         border-bottom-width: 0px;
         transform: translateY(4px);
-        box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        box-shadow: none;
       }
+
       .spacer {
         width: 45px;
       }
@@ -88,7 +145,7 @@
       }
       .vol-key {
         font-size: 18px;
-      } /* Ícones de volume um pouco maiores */
+      }
       .backspace {
         width: 95px;
         font-size: 18px;
@@ -150,8 +207,6 @@
         grid-template-rows: repeat(5, 45px);
         gap: 5px;
       }
-
-      /* Ajustes específicos do novo Numpad */
       .num-enter {
         grid-column: 4;
         grid-row: 4 / 6;
@@ -164,6 +219,16 @@
     </style>
   </head>
   <body>
+    <div class="input-container">
+      <input
+        type="text"
+        id="practice-input"
+        placeholder="Digite:"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+
     <div class="keyboard-board">
       <div class="main-block">
         <div class="row">
@@ -236,7 +301,7 @@
         </div>
 
         <div class="row">
-          <div class="key shift-left" data-key="ShiftLeft">Shift ⇧</div>
+          <div class="key shift-left" data-key="ShiftLeft">Shift</div>
           <div class="key" data-key="IntlBackslash">|<br />\</div>
           <div class="key" data-key="KeyZ">Z</div>
           <div class="key" data-key="KeyX">X</div>
@@ -249,7 +314,7 @@
           <div class="key" data-key="Period">><br />.</div>
           <div class="key" data-key="Slash">:<br />;</div>
           <div class="key" data-key="IntlRo">?<br />/</div>
-          <div class="key shift-right" data-key="ShiftRight">Shift ⇧</div>
+          <div class="key shift-right" data-key="ShiftRight">Shift</div>
         </div>
 
         <div class="row">
@@ -258,7 +323,7 @@
           <div class="key alt" data-key="AltLeft">Alt</div>
           <div class="key space" data-key="Space"></div>
           <div class="key alt" data-key="AltRight">Alt Gr</div>
-          <div class="key win" data-key="MetaRight">Fn</div>
+          <div class="key win" data-key="MetaRight">Win</div>
           <div class="key menu" data-key="ContextMenu">Menu</div>
           <div class="key ctrl" data-key="ControlRight">Ctrl</div>
         </div>
@@ -272,10 +337,10 @@
         </div>
         <div class="spacer-nav"></div>
         <div class="nav-grid">
-          <div class="key" data-key="Insert">Insert</div>
+          <div class="key" data-key="Insert">Ins</div>
           <div class="key" data-key="Home">Home</div>
           <div class="key" data-key="PageUp">PgUp</div>
-          <div class="key" data-key="Delete">Delete</div>
+          <div class="key" data-key="Delete">Del</div>
           <div class="key" data-key="End">End</div>
           <div class="key" data-key="PageDown">PgDn</div>
         </div>
@@ -292,7 +357,7 @@
       <div class="numpad-block">
         <div class="row numpad-top-spacer"></div>
         <div class="numpad-grid">
-          <div class="key" data-key="NumLock">Num Lock</div>
+          <div class="key" data-key="NumLock">Num</div>
           <div class="key" data-key="NumpadDivide">/</div>
           <div class="key" data-key="NumpadMultiply">*</div>
           <div class="key" data-key="NumpadSubtract">-</div>
@@ -306,10 +371,11 @@
           <div class="key" data-key="Numpad5">5</div>
           <div class="key" data-key="Numpad6">6</div>
           <div class="key" data-key="NumpadDecimal">.</div>
+
           <div class="key" data-key="Numpad1">1</div>
           <div class="key" data-key="Numpad2">2</div>
           <div class="key" data-key="Numpad3">3</div>
-          <div class="key num-enter" data-key="NumpadEnter">Enter</div>
+          <div class="key num-enter" data-key="NumpadEnter">Ent</div>
 
           <div class="key num-zero" data-key="Numpad0">0</div>
           <div class="key" data-key="NumpadComma">,</div>
@@ -318,6 +384,17 @@
     </div>
 
     <script>
+      const inputField = document.getElementById("practice-input");
+
+      // Mantém a caixa de texto sempre focada
+      window.onload = () => inputField.focus();
+      document.addEventListener("click", () => {
+        if (document.activeElement !== inputField) {
+          inputField.focus();
+        }
+      });
+
+      // Removi Space e Backspace para digitar livremente
       const preventDefaultKeys = [
         "F1",
         "F2",
@@ -334,22 +411,42 @@
         "Tab",
         "AltLeft",
         "AltRight",
-        "Space",
-        "Backspace",
         "Enter",
       ];
 
+      let isCapsLockOn = false;
+
+      function atualizarVisualCapsLock() {
+        const capsKeyElement = document.querySelector(
+          '.key[data-key="CapsLock"]',
+        );
+        if (capsKeyElement) {
+          if (isCapsLockOn) {
+            capsKeyElement.classList.add("caps-on");
+          } else {
+            capsKeyElement.classList.remove("caps-on");
+          }
+        }
+      }
+
       window.addEventListener("keydown", function (event) {
-        if (preventDefaultKeys.includes(event.code) || event.key === "/") {
+        if (preventDefaultKeys.includes(event.code)) {
           event.preventDefault();
         }
 
-        // Tenta pegar a tecla pelo código (padrão)
+        if (event.code === "CapsLock") {
+          if (!event.repeat) {
+            isCapsLockOn = !isCapsLockOn;
+            atualizarVisualCapsLock();
+          }
+        } else if (event.key !== "Unidentified") {
+          isCapsLockOn = event.getModifierState("CapsLock");
+          atualizarVisualCapsLock();
+        }
+
         let keyElement = document.querySelector(
           `.key[data-key="${event.code}"]`,
         );
-
-        // Para as teclas de volume, alguns navegadores usam event.key em vez de event.code
         if (
           !keyElement &&
           (event.key === "AudioVolumeMute" ||
@@ -365,14 +462,13 @@
       });
 
       window.addEventListener("keyup", function (event) {
-        if (preventDefaultKeys.includes(event.code) || event.key === "/") {
+        if (preventDefaultKeys.includes(event.code)) {
           event.preventDefault();
         }
 
         let keyElement = document.querySelector(
           `.key[data-key="${event.code}"]`,
         );
-
         if (
           !keyElement &&
           (event.key === "AudioVolumeMute" ||
@@ -387,7 +483,33 @@
         }
       });
 
-      // Impede o menu do botão direito
+      document.querySelectorAll(".key").forEach((keyElement) => {
+        keyElement.addEventListener("mousedown", function (e) {
+          e.preventDefault();
+          this.classList.add("active");
+
+          if (this.dataset.key === "CapsLock") {
+            isCapsLockOn = !isCapsLockOn;
+            atualizarVisualCapsLock();
+          }
+        });
+
+        keyElement.addEventListener("mouseup", function () {
+          this.classList.remove("active");
+        });
+
+        keyElement.addEventListener("mouseleave", function () {
+          this.classList.remove("active");
+        });
+      });
+
+      window.addEventListener("mousedown", function (event) {
+        if (!event.target.classList.contains("key")) {
+          isCapsLockOn = event.getModifierState("CapsLock");
+          atualizarVisualCapsLock();
+        }
+      });
+
       window.addEventListener("contextmenu", (event) => event.preventDefault());
     </script>
   </body>
