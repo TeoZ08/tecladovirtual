@@ -21,10 +21,9 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         padding: 20px;
         overflow: hidden;
-        position: relative; /* Necessário para a imagem de fundo */
+        position: relative;
       }
 
-      /* --- MARCA D'ÁGUA DA LOGO NO FUNDO --- */
       body::before {
         content: "";
         position: absolute;
@@ -34,17 +33,17 @@
         bottom: 0;
         background-image: url("logo-unapi.png");
         background-repeat: no-repeat;
-        background-position: center 1%;
-        background-size: 400px; /* Tamanho fixo para encaixar bem atrás da caixa */
-        opacity: 0.5;
+        background-position: center -4%;
+        background-size: 400px;
         z-index: -1;
       }
 
-      /* --- CAIXA DE TEXTO --- */
+      /* 1. CAIXA DE TEXTO */
       .input-container {
         width: 100%;
         max-width: 900px;
-        margin-bottom: 40px;
+        margin-bottom: 30px; /* Espaçamento padronizado */
+        margin-top: 120px;
         z-index: 1;
       }
 
@@ -55,20 +54,18 @@
         border-radius: 12px;
         background-color: #2b2b2b;
         color: #ffffff;
-        border: solid #c49a29; /* Roxo mais sóbrio da UnAPI */
+        border: 3px solid #c49a29;
         outline: none;
         text-align: center;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         transition: all 0.3s ease;
-        font-family: poppins;
       }
 
       #practice-input::placeholder {
         color: #777;
-        font-style: italic;
       }
 
-      /* --- TECLADO --- */
+      /* 2. TECLADO */
       .keyboard-board {
         display: flex;
         gap: 15px;
@@ -80,6 +77,7 @@
         transform: scale(1.15);
         transform-origin: top center;
         z-index: 1;
+        margin-bottom: 60px; /* Ajustado para 60px para compensar a escala e afastar o botão inferior */
       }
 
       .main-block,
@@ -110,17 +108,18 @@
         transition:
           background-color 0.1s,
           transform 0.1s,
-          border-bottom-width 0.1s;
+          border-bottom-width 0.1s,
+          opacity 0.3s;
         user-select: none;
         line-height: 1.2;
         cursor: pointer;
+        position: relative;
       }
 
-      /* ESTADO ATIVO - Cores opacas, sem brilho/neon */
       .key.active,
       .key.caps-on {
-        background-color: #c49a29; /* Amarelo mostarda mais suave/fechado */
-        color: #111; /* Texto escuro para contraste */
+        background-color: #c49a29;
+        color: #111;
         border-bottom-width: 0px;
         transform: translateY(4px);
         box-shadow: none;
@@ -216,6 +215,89 @@
         grid-column: 1 / 3;
         width: 95px;
       }
+
+      /* 3. CONTROLES E BOTÕES */
+      #controls-area {
+        width: 100%;
+        max-width: 900px;
+        text-align: center;
+        margin-bottom: 10px;
+        z-index: 1;
+      }
+
+      .btn-mode {
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 8px;
+        border: 1px solid #505050;
+        background-color: #383838;
+        color: white;
+        transition: all 0.2s;
+        font-size: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn-mode:hover {
+        background-color: #c49a29;
+        color: black;
+        border-color: #c49a29;
+      }
+
+      #family-menu {
+        width: 100%;
+        max-width: 900px;
+        text-align: center;
+        z-index: 1;
+        background-color: #2b2b2b;
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #3d3d3d;
+        color: white;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      }
+
+      #family-menu p {
+        margin-bottom: 15px;
+        font-weight: bold;
+        color: #ccc;
+      }
+
+      #family-menu button {
+        margin: 0 5px;
+        padding: 8px 15px;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 1px solid #505050;
+        background-color: #383838;
+        color: white;
+        transition: all 0.2s;
+        font-weight: bold;
+      }
+
+      #family-menu button:hover {
+        background-color: #c49a29;
+        color: black;
+        border-color: #c49a29;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .mode-families-active .key {
+        opacity: 0.2;
+        filter: grayscale(1);
+        transition: all 0.3s ease;
+      }
+
+      .key.highlight-active {
+        opacity: 1 !important;
+        filter: grayscale(0) !important;
+        box-shadow: 0 0 15px rgba(196, 154, 41, 0.6);
+        border: 2px solid #c49a29 !important;
+        z-index: 2;
+      }
     </style>
   </head>
   <body>
@@ -229,172 +311,197 @@
       />
     </div>
 
-    <div class="keyboard-board">
-      <div class="main-block">
-        <div class="row">
-          <div class="key esc" data-key="Escape">Esc</div>
-          <div class="spacer"></div>
-          <div class="key f-key" data-key="F1">F1</div>
-          <div class="key f-key" data-key="F2">F2</div>
-          <div class="key f-key" data-key="F3">F3</div>
-          <div class="key f-key" data-key="F4">F4</div>
-          <div class="spacer-small"></div>
-          <div class="key f-key" data-key="F5">F5</div>
-          <div class="key f-key" data-key="F6">F6</div>
-          <div class="key f-key" data-key="F7">F7</div>
-          <div class="key f-key" data-key="F8">F8</div>
-          <div class="spacer-small"></div>
-          <div class="key f-key" data-key="F9">F9</div>
-          <div class="key f-key" data-key="F10">F10</div>
-          <div class="key f-key" data-key="F11">F11</div>
-          <div class="key f-key" data-key="F12">F12</div>
+    <div
+      style="
+        margin-bottom: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      "
+    >
+      <div class="keyboard-board" id="keyboard-container">
+        <div class="main-block">
+          <div class="row">
+            <div class="key esc" data-key="Escape">Esc</div>
+            <div class="spacer"></div>
+            <div class="key f-key" data-key="F1">F1</div>
+            <div class="key f-key" data-key="F2">F2</div>
+            <div class="key f-key" data-key="F3">F3</div>
+            <div class="key f-key" data-key="F4">F4</div>
+            <div class="spacer-small"></div>
+            <div class="key f-key" data-key="F5">F5</div>
+            <div class="key f-key" data-key="F6">F6</div>
+            <div class="key f-key" data-key="F7">F7</div>
+            <div class="key f-key" data-key="F8">F8</div>
+            <div class="spacer-small"></div>
+            <div class="key f-key" data-key="F9">F9</div>
+            <div class="key f-key" data-key="F10">F10</div>
+            <div class="key f-key" data-key="F11">F11</div>
+            <div class="key f-key" data-key="F12">F12</div>
+          </div>
+
+          <div class="row">
+            <div class="key" data-key="Backquote">"<br />'</div>
+            <div class="key" data-key="Digit1">!<br />1</div>
+            <div class="key" data-key="Digit2">@<br />2</div>
+            <div class="key" data-key="Digit3">#<br />3</div>
+            <div class="key" data-key="Digit4">$<br />4</div>
+            <div class="key" data-key="Digit5">%<br />5</div>
+            <div class="key" data-key="Digit6">¨<br />6</div>
+            <div class="key" data-key="Digit7">&<br />7</div>
+            <div class="key" data-key="Digit8">*<br />8</div>
+            <div class="key" data-key="Digit9">(<br />9</div>
+            <div class="key" data-key="Digit0">)<br />0</div>
+            <div class="key" data-key="Minus">_<br />-</div>
+            <div class="key" data-key="Equal">+<br />=</div>
+            <div class="key backspace" data-key="Backspace">←</div>
+          </div>
+
+          <div class="row">
+            <div class="key tab" data-key="Tab">Tab</div>
+            <div class="key" data-key="KeyQ">Q</div>
+            <div class="key" data-key="KeyW">W</div>
+            <div class="key" data-key="KeyE">E</div>
+            <div class="key" data-key="KeyR">R</div>
+            <div class="key" data-key="KeyT">T</div>
+            <div class="key" data-key="KeyY">Y</div>
+            <div class="key" data-key="KeyU">U</div>
+            <div class="key" data-key="KeyI">I</div>
+            <div class="key" data-key="KeyO">O</div>
+            <div class="key" data-key="KeyP">P</div>
+            <div class="key" data-key="BracketLeft">`<br />´</div>
+            <div class="key" data-key="BracketRight">{<br />[</div>
+            <div class="key enter-top" data-key="Enter">Enter</div>
+          </div>
+
+          <div class="row">
+            <div class="key capslock" data-key="CapsLock">Caps Lock</div>
+            <div class="key" data-key="KeyA">A</div>
+            <div class="key" data-key="KeyS">S</div>
+            <div class="key" data-key="KeyD">D</div>
+            <div class="key" data-key="KeyF">F</div>
+            <div class="key" data-key="KeyG">G</div>
+            <div class="key" data-key="KeyH">H</div>
+            <div class="key" data-key="KeyJ">J</div>
+            <div class="key" data-key="KeyK">K</div>
+            <div class="key" data-key="KeyL">L</div>
+            <div class="key" data-key="Semicolon">Ç</div>
+            <div class="key" data-key="Quote">^<br />~</div>
+            <div class="key" data-key="Backslash">}<br />]</div>
+          </div>
+
+          <div class="row">
+            <div class="key shift-left" data-key="ShiftLeft">Shift ⇧</div>
+            <div class="key" data-key="IntlBackslash">|<br />\</div>
+            <div class="key" data-key="KeyZ">Z</div>
+            <div class="key" data-key="KeyX">X</div>
+            <div class="key" data-key="KeyC">C</div>
+            <div class="key" data-key="KeyV">V</div>
+            <div class="key" data-key="KeyB">B</div>
+            <div class="key" data-key="KeyN">N</div>
+            <div class="key" data-key="KeyM">M</div>
+            <div class="key" data-key="Comma"><<br />,</div>
+            <div class="key" data-key="Period">><br />.</div>
+            <div class="key" data-key="Slash">:<br />;</div>
+            <div class="key" data-key="IntlRo">?<br />/</div>
+            <div class="key shift-right" data-key="ShiftRight">Shift ⇧</div>
+          </div>
+
+          <div class="row">
+            <div class="key ctrl" data-key="ControlLeft">Ctrl</div>
+            <div class="key win" data-key="MetaLeft">Win</div>
+            <div class="key alt" data-key="AltLeft">Alt</div>
+            <div class="key space" data-key="Space"></div>
+            <div class="key alt" data-key="AltRight">Alt Gr</div>
+            <div class="key win" data-key="MetaRight">Fn</div>
+            <div class="key menu" data-key="ContextMenu">Menu</div>
+            <div class="key ctrl" data-key="ControlRight">Ctrl</div>
+          </div>
         </div>
 
-        <div class="row">
-          <div class="key" data-key="Backquote">"<br />'</div>
-          <div class="key" data-key="Digit1">!<br />1</div>
-          <div class="key" data-key="Digit2">@<br />2</div>
-          <div class="key" data-key="Digit3">#<br />3</div>
-          <div class="key" data-key="Digit4">$<br />4</div>
-          <div class="key" data-key="Digit5">%<br />5</div>
-          <div class="key" data-key="Digit6">¨<br />6</div>
-          <div class="key" data-key="Digit7">&<br />7</div>
-          <div class="key" data-key="Digit8">*<br />8</div>
-          <div class="key" data-key="Digit9">(<br />9</div>
-          <div class="key" data-key="Digit0">)<br />0</div>
-          <div class="key" data-key="Minus">_<br />-</div>
-          <div class="key" data-key="Equal">+<br />=</div>
-          <div class="key backspace" data-key="Backspace">←</div>
+        <div class="nav-block">
+          <div class="row">
+            <div class="key f-key vol-key" data-key="AudioVolumeMute">🔇</div>
+            <div class="key f-key vol-key" data-key="AudioVolumeDown">🔉</div>
+            <div class="key f-key vol-key" data-key="AudioVolumeUp">🔊</div>
+          </div>
+          <div class="spacer-nav"></div>
+          <div class="nav-grid">
+            <div class="key" data-key="Insert">Insert</div>
+            <div class="key" data-key="Home">Home</div>
+            <div class="key" data-key="PageUp">PgUp</div>
+            <div class="key" data-key="Delete">Delete</div>
+            <div class="key" data-key="End">End</div>
+            <div class="key" data-key="PageDown">PgDn</div>
+          </div>
+          <div class="arrows-grid">
+            <div></div>
+            <div class="key" data-key="ArrowUp">↑</div>
+            <div></div>
+            <div class="key" data-key="ArrowLeft">←</div>
+            <div class="key" data-key="ArrowDown">↓</div>
+            <div class="key" data-key="ArrowRight">→</div>
+          </div>
         </div>
 
-        <div class="row">
-          <div class="key tab" data-key="Tab">Tab</div>
-          <div class="key" data-key="KeyQ">Q</div>
-          <div class="key" data-key="KeyW">W</div>
-          <div class="key" data-key="KeyE">E</div>
-          <div class="key" data-key="KeyR">R</div>
-          <div class="key" data-key="KeyT">T</div>
-          <div class="key" data-key="KeyY">Y</div>
-          <div class="key" data-key="KeyU">U</div>
-          <div class="key" data-key="KeyI">I</div>
-          <div class="key" data-key="KeyO">O</div>
-          <div class="key" data-key="KeyP">P</div>
-          <div class="key" data-key="BracketLeft">`<br />´</div>
-          <div class="key" data-key="BracketRight">{<br />[</div>
-          <div class="key enter-top" data-key="Enter">Enter</div>
-        </div>
+        <div class="numpad-block">
+          <div class="row numpad-top-spacer"></div>
+          <div class="numpad-grid">
+            <div class="key" data-key="NumLock">Num Lock</div>
+            <div class="key" data-key="NumpadDivide">/</div>
+            <div class="key" data-key="NumpadMultiply">*</div>
+            <div class="key" data-key="NumpadSubtract">-</div>
 
-        <div class="row">
-          <div class="key capslock" data-key="CapsLock">Caps Lock</div>
-          <div class="key" data-key="KeyA">A</div>
-          <div class="key" data-key="KeyS">S</div>
-          <div class="key" data-key="KeyD">D</div>
-          <div class="key" data-key="KeyF">F</div>
-          <div class="key" data-key="KeyG">G</div>
-          <div class="key" data-key="KeyH">H</div>
-          <div class="key" data-key="KeyJ">J</div>
-          <div class="key" data-key="KeyK">K</div>
-          <div class="key" data-key="KeyL">L</div>
-          <div class="key" data-key="Semicolon">Ç</div>
-          <div class="key" data-key="Quote">^<br />~</div>
-          <div class="key" data-key="Backslash">}<br />]</div>
-        </div>
+            <div class="key" data-key="Numpad7">7</div>
+            <div class="key" data-key="Numpad8">8</div>
+            <div class="key" data-key="Numpad9">9</div>
+            <div class="key" data-key="NumpadAdd">+</div>
 
-        <div class="row">
-          <div class="key shift-left" data-key="ShiftLeft">Shift</div>
-          <div class="key" data-key="IntlBackslash">|<br />\</div>
-          <div class="key" data-key="KeyZ">Z</div>
-          <div class="key" data-key="KeyX">X</div>
-          <div class="key" data-key="KeyC">C</div>
-          <div class="key" data-key="KeyV">V</div>
-          <div class="key" data-key="KeyB">B</div>
-          <div class="key" data-key="KeyN">N</div>
-          <div class="key" data-key="KeyM">M</div>
-          <div class="key" data-key="Comma"><<br />,</div>
-          <div class="key" data-key="Period">><br />.</div>
-          <div class="key" data-key="Slash">:<br />;</div>
-          <div class="key" data-key="IntlRo">?<br />/</div>
-          <div class="key shift-right" data-key="ShiftRight">Shift</div>
-        </div>
+            <div class="key" data-key="Numpad4">4</div>
+            <div class="key" data-key="Numpad5">5</div>
+            <div class="key" data-key="Numpad6">6</div>
+            <div class="key" data-key="NumpadDecimal">.</div>
 
-        <div class="row">
-          <div class="key ctrl" data-key="ControlLeft">Ctrl</div>
-          <div class="key win" data-key="MetaLeft">Win</div>
-          <div class="key alt" data-key="AltLeft">Alt</div>
-          <div class="key space" data-key="Space"></div>
-          <div class="key alt" data-key="AltRight">Alt Gr</div>
-          <div class="key win" data-key="MetaRight">Win</div>
-          <div class="key menu" data-key="ContextMenu">Menu</div>
-          <div class="key ctrl" data-key="ControlRight">Ctrl</div>
+            <div class="key" data-key="Numpad1">1</div>
+            <div class="key" data-key="Numpad2">2</div>
+            <div class="key" data-key="Numpad3">3</div>
+            <div class="key num-enter" data-key="NumpadEnter">Enter</div>
+
+            <div class="key num-zero" data-key="Numpad0">0</div>
+            <div class="key" data-key="NumpadComma">,</div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="nav-block">
-        <div class="row">
-          <div class="key f-key vol-key" data-key="AudioVolumeMute">🔇</div>
-          <div class="key f-key vol-key" data-key="AudioVolumeDown">🔉</div>
-          <div class="key f-key vol-key" data-key="AudioVolumeUp">🔊</div>
-        </div>
-        <div class="spacer-nav"></div>
-        <div class="nav-grid">
-          <div class="key" data-key="Insert">Ins</div>
-          <div class="key" data-key="Home">Home</div>
-          <div class="key" data-key="PageUp">PgUp</div>
-          <div class="key" data-key="Delete">Del</div>
-          <div class="key" data-key="End">End</div>
-          <div class="key" data-key="PageDown">PgDn</div>
-        </div>
-        <div class="arrows-grid">
-          <div></div>
-          <div class="key" data-key="ArrowUp">↑</div>
-          <div></div>
-          <div class="key" data-key="ArrowLeft">←</div>
-          <div class="key" data-key="ArrowDown">↓</div>
-          <div class="key" data-key="ArrowRight">→</div>
-        </div>
-      </div>
+    <div id="controls-area">
+      <button id="toggle-families" class="btn-mode">Ver Famílias</button>
+    </div>
 
-      <div class="numpad-block">
-        <div class="row numpad-top-spacer"></div>
-        <div class="numpad-grid">
-          <div class="key" data-key="NumLock">Num</div>
-          <div class="key" data-key="NumpadDivide">/</div>
-          <div class="key" data-key="NumpadMultiply">*</div>
-          <div class="key" data-key="NumpadSubtract">-</div>
-
-          <div class="key" data-key="Numpad7">7</div>
-          <div class="key" data-key="Numpad8">8</div>
-          <div class="key" data-key="Numpad9">9</div>
-          <div class="key" data-key="NumpadAdd">+</div>
-
-          <div class="key" data-key="Numpad4">4</div>
-          <div class="key" data-key="Numpad5">5</div>
-          <div class="key" data-key="Numpad6">6</div>
-          <div class="key" data-key="NumpadDecimal">.</div>
-
-          <div class="key" data-key="Numpad1">1</div>
-          <div class="key" data-key="Numpad2">2</div>
-          <div class="key" data-key="Numpad3">3</div>
-          <div class="key num-enter" data-key="NumpadEnter">Ent</div>
-
-          <div class="key num-zero" data-key="Numpad0">0</div>
-          <div class="key" data-key="NumpadComma">,</div>
-        </div>
-      </div>
+    <div id="family-menu" class="hidden">
+      <p>Selecione uma família para destacar no teclado:</p>
+      <button onclick="highlightFamily('escrita')">Escrita (Letras)</button>
+      <button onclick="highlightFamily('numeros')">Números</button>
+      <button onclick="highlightFamily('comandos')">Comandos Especiais</button>
+      <button onclick="highlightFamily('navegacao')">Navegação</button>
+      <button onclick="resetHighlights()" style="background-color: #444">
+        Limpar Visualização
+      </button>
     </div>
 
     <script>
       const inputField = document.getElementById("practice-input");
 
-      // Mantém a caixa de texto sempre focada
       window.onload = () => inputField.focus();
-      document.addEventListener("click", () => {
-        if (document.activeElement !== inputField) {
+      document.addEventListener("click", (e) => {
+        if (
+          document.activeElement !== inputField &&
+          e.target.tagName !== "BUTTON"
+        ) {
           inputField.focus();
         }
       });
 
-      // Removi Space e Backspace para digitar livremente
       const preventDefaultKeys = [
         "F1",
         "F2",
@@ -504,13 +611,133 @@
       });
 
       window.addEventListener("mousedown", function (event) {
-        if (!event.target.classList.contains("key")) {
+        if (
+          !event.target.classList.contains("key") &&
+          event.target.tagName !== "BUTTON"
+        ) {
           isCapsLockOn = event.getModifierState("CapsLock");
           atualizarVisualCapsLock();
         }
       });
 
       window.addEventListener("contextmenu", (event) => event.preventDefault());
+
+      const families = {
+        escrita: [
+          "KeyA",
+          "KeyB",
+          "KeyC",
+          "KeyD",
+          "KeyE",
+          "KeyF",
+          "KeyG",
+          "KeyH",
+          "KeyI",
+          "KeyJ",
+          "KeyK",
+          "KeyL",
+          "KeyM",
+          "KeyN",
+          "KeyO",
+          "KeyP",
+          "KeyQ",
+          "KeyR",
+          "KeyS",
+          "KeyT",
+          "KeyU",
+          "KeyV",
+          "KeyW",
+          "KeyX",
+          "KeyY",
+          "KeyZ",
+          "Semicolon",
+          "Space",
+        ],
+        numeros: [
+          "Digit1",
+          "Digit2",
+          "Digit3",
+          "Digit4",
+          "Digit5",
+          "Digit6",
+          "Digit7",
+          "Digit8",
+          "Digit9",
+          "Digit0",
+          "Numpad1",
+          "Numpad2",
+          "Numpad3",
+          "Numpad4",
+          "Numpad5",
+          "Numpad6",
+          "Numpad7",
+          "Numpad8",
+          "Numpad9",
+          "Numpad0",
+        ],
+        comandos: [
+          "ControlLeft",
+          "ControlRight",
+          "AltLeft",
+          "AltRight",
+          "MetaLeft",
+          "MetaRight",
+          "ShiftLeft",
+          "ShiftRight",
+          "CapsLock",
+          "Escape",
+          "Enter",
+          "NumpadEnter",
+          "Backspace",
+        ],
+        navegacao: [
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "Home",
+          "End",
+          "PageUp",
+          "PageDown",
+          "Tab",
+        ],
+      };
+
+      const toggleBtn = document.getElementById("toggle-families");
+      const familyMenu = document.getElementById("family-menu");
+      const keyboard = document.getElementById("keyboard-container");
+
+      toggleBtn.addEventListener("click", () => {
+        const isActive = keyboard.classList.toggle("mode-families-active");
+        familyMenu.classList.toggle("hidden");
+        toggleBtn.innerText = isActive
+          ? "Ocultar Menu de Famílias"
+          : "Ver Famílias";
+
+        if (!isActive) {
+          resetHighlights();
+        } else {
+          inputField.blur();
+        }
+      });
+
+      function highlightFamily(familyName) {
+        resetHighlights();
+        const keysToHighlight = families[familyName];
+
+        document.querySelectorAll(".key").forEach((key) => {
+          if (keysToHighlight.includes(key.dataset.key)) {
+            key.classList.add("highlight-active");
+          }
+        });
+      }
+
+      function resetHighlights() {
+        document.querySelectorAll(".key").forEach((key) => {
+          key.classList.remove("highlight-active");
+        });
+        inputField.focus();
+      }
     </script>
   </body>
 </html>
