@@ -28,23 +28,23 @@
       .logo-watermark {
         width: 100%;
         max-width: 900px;
-        height: 330px; /* Espaço exato para a imagem não cortar */
+        height: 330px;
         background-image: url("logo-unapi.png");
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: contain;
-        opacity: 1; /* Transparência da marca d'água */
-        margin-bottom: -15px; /* Puxa a caixa de texto para cima para encaixar na escrita */
+        opacity: 1;
+        margin-bottom: -15px;
         z-index: 0;
-        pointer-events: none; /* Garante que não roube o clique do mouse */
+        pointer-events: none;
       }
 
       /* 1. CAIXA DE TEXTO */
       .input-container {
         width: 100%;
         max-width: 900px;
-        margin-bottom: 30px; /* Espaçamento padronizado */
-        z-index: 2; /* Mantém a caixa na frente da logo */
+        margin-bottom: 30px;
+        z-index: 2;
         position: relative;
       }
 
@@ -78,7 +78,7 @@
         transform: scale(1.15);
         transform-origin: top center;
         z-index: 1;
-        margin-bottom: 60px; /* Ajustado para 60px para compensar a escala e afastar o botão inferior */
+        margin-bottom: 60px;
       }
 
       .main-block,
@@ -217,12 +217,16 @@
         width: 95px;
       }
 
-      /* 3. CONTROLES E BOTÕES */
-      #controls-area {
+      /* 3. CONTROLES E MENU HORIZONTAL (NOVO) */
+      #controls-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
         width: 100%;
-        max-width: 900px;
-        text-align: center;
-        margin-bottom: 10px;
+        max-width: 1100px;
+        height: 60px; /* Altura fixa evita que a tela pule */
         z-index: 1;
       }
 
@@ -237,6 +241,7 @@
         transition: all 0.2s;
         font-size: 15px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        white-space: nowrap;
       }
 
       .btn-mode:hover {
@@ -246,20 +251,31 @@
       }
 
       #family-menu {
-        width: 100%;
-        max-width: 900px;
-        text-align: center;
-        z-index: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         background-color: #2b2b2b;
-        padding: 15px;
+        padding: 10px 15px;
         border-radius: 12px;
         border: 1px solid #3d3d3d;
         color: white;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        animation: slideIn 0.3s ease-out; /* Animação de entrada lateral */
       }
 
-      #family-menu p {
-        margin-bottom: 15px;
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .menu-label {
+        margin-right: 15px;
         font-weight: bold;
         color: #ccc;
       }
@@ -280,6 +296,11 @@
         background-color: #c49a29;
         color: black;
         border-color: #c49a29;
+      }
+
+      #family-menu .btn-clear {
+        background-color: #444;
+        margin-left: 15px;
       }
 
       .hidden {
@@ -477,19 +498,17 @@
       </div>
     </div>
 
-    <div id="controls-area">
+    <div id="controls-wrapper">
       <button id="toggle-families" class="btn-mode">Ver Famílias</button>
-    </div>
 
-    <div id="family-menu" class="hidden">
-      <p>Selecione uma família para destacar no teclado:</p>
-      <button onclick="highlightFamily('escrita')">Escrita (Letras)</button>
-      <button onclick="highlightFamily('numeros')">Números</button>
-      <button onclick="highlightFamily('comandos')">Comandos Especiais</button>
-      <button onclick="highlightFamily('navegacao')">Navegação</button>
-      <button onclick="resetHighlights()" style="background-color: #444">
-        Limpar Visualização
-      </button>
+      <div id="family-menu" class="hidden">
+        <span class="menu-label">Destacar:</span>
+        <button onclick="highlightFamily('escrita')">Letras</button>
+        <button onclick="highlightFamily('numeros')">Números</button>
+        <button onclick="highlightFamily('comandos')">Comandos</button>
+        <button onclick="highlightFamily('navegacao')">Navegação</button>
+        <button onclick="resetHighlights()" class="btn-clear">Limpar</button>
+      </div>
     </div>
 
     <script>
@@ -713,9 +732,7 @@
       toggleBtn.addEventListener("click", () => {
         const isActive = keyboard.classList.toggle("mode-families-active");
         familyMenu.classList.toggle("hidden");
-        toggleBtn.innerText = isActive
-          ? "Ocultar Menu de Famílias"
-          : "Ver Famílias";
+        toggleBtn.innerText = isActive ? "Ocultar Menu" : "Ver Famílias";
 
         if (!isActive) {
           resetHighlights();
