@@ -217,7 +217,7 @@
         width: 95px;
       }
 
-      /* 3. CONTROLES E MENU HORIZONTAL (NOVO) */
+      /* 3. CONTROLES E MENU HORIZONTAL */
       #controls-wrapper {
         display: flex;
         flex-direction: row;
@@ -319,6 +319,19 @@
         box-shadow: 0 0 15px rgba(196, 154, 41, 0.6);
         border: 2px solid #c49a29 !important;
         z-index: 2;
+      }
+
+      /* QUANDO A TELA ESTIVER EM MODO FULLSCREEN, ESCONDE O BOTÃO */
+      :fullscreen #btn-fullscreen {
+        display: none;
+      }
+
+      /* Opcional: Para compatibilidade com navegadores mais antigos (Safari/Firefox) */
+      :-webkit-full-screen #btn-fullscreen {
+        display: none;
+      }
+      :-moz-full-screen #btn-fullscreen {
+        display: none;
       }
     </style>
   </head>
@@ -499,6 +512,7 @@
     </div>
 
     <div id="controls-wrapper">
+      <button id="btn-fullscreen" class="btn-mode">🖥️ Tela Cheia</button>
       <button id="toggle-families" class="btn-mode">Ver Famílias</button>
 
       <div id="family-menu" class="hidden">
@@ -758,6 +772,27 @@
         });
         inputField.focus();
       }
+
+      // TELA CHEIA - LÓGICA DO BOTÃO
+      const btnFullscreen = document.getElementById("btn-fullscreen");
+
+      btnFullscreen.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch((err) => {
+            alert(`Erro ao tentar tela cheia: ${err.message}`);
+          });
+        } else {
+          document.exitFullscreen();
+        }
+      });
+
+      // Atalho com a tecla F10 para alternar Tela Cheia
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "F10") {
+          event.preventDefault(); // Impede o comportamento padrão do F10 no navegador
+          btnFullscreen.click();
+        }
+      });
     </script>
   </body>
 </html>
