@@ -12,7 +12,7 @@
       }
 
       body {
-        background-color: #1a1a1a;
+        background-color: #fff8dc; /* Fundo alterado para a cor solicitada */
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -33,7 +33,7 @@
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: contain;
-        opacity: 1;
+        opacity: 0.8; /* Ajustado levemente para o fundo claro */
         margin-bottom: -15px;
         z-index: 0;
         pointer-events: none;
@@ -53,8 +53,8 @@
         font-size: 28px;
         padding: 20px;
         border-radius: 12px;
-        background-color: #2b2b2b;
-        color: #ffffff;
+        background-color: #2b2b2b; /* Mantido original */
+        color: #ffffff; /* Mantido original */
         border: 3px solid #c49a29;
         outline: none;
         text-align: center;
@@ -70,7 +70,7 @@
       .keyboard-board {
         display: flex;
         gap: 15px;
-        background-color: rgba(43, 43, 43, 0.95);
+        background-color: rgba(43, 43, 43, 0.95); /* Mantido original */
         padding: 20px;
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
@@ -226,7 +226,7 @@
         gap: 15px;
         width: 100%;
         max-width: 1100px;
-        height: 60px; /* Altura fixa evita que a tela pule */
+        height: 60px;
         z-index: 1;
       }
 
@@ -260,7 +260,7 @@
         border: 1px solid #3d3d3d;
         color: white;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        animation: slideIn 0.3s ease-out; /* Animação de entrada lateral */
+        animation: slideIn 0.3s ease-out;
       }
 
       @keyframes slideIn {
@@ -325,8 +325,6 @@
       :fullscreen #btn-fullscreen {
         display: none;
       }
-
-      /* Opcional: Para compatibilidade com navegadores mais antigos (Safari/Firefox) */
       :-webkit-full-screen #btn-fullscreen {
         display: none;
       }
