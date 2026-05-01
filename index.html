@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Treino de Teclado - UnAPI UFMS</title>
     <style>
+      :root {
+        --unapi-fundo: #fff8dc;
+        --unapi-roxo: #542a58;
+        --unapi-amarelo: #ddb622;
+        --unapi-amarelo-hover: #e6c543;
+        --unapi-sombra: 0 8px 20px rgba(0, 0, 0, 0.15);
+        --unapi-borda: 20px;
+        --unapi-fonte: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        --keyboard-scale: 1;
+      }
+
       * {
         box-sizing: border-box;
         margin: 0;
@@ -12,7 +23,7 @@
       }
 
       body {
-        background-color: #fff8dc; /* Fundo alterado para a cor solicitada */
+        background-color: var(--unapi-fundo);
         background-image: url("data:image/svg+xml,%3Csvg%20width%3D%221920%22%20height%3D%221080%22%20viewBox%3D%220%200%201920%201080%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221920%22%20y2%3D%221080%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff8dc%22%2F%3E%3Cstop%20offset%3D%220.5%22%20stop-color%3D%22%23fffdf0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3C%2FlinearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22purple%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221920%22%20y2%3D%221080%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23542a58%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%232f1238%22%2F%3E%3C%2FlinearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22gold%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221920%22%20y2%3D%221080%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ddb622%22%2F%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%23e6c543%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c99f13%22%2F%3E%3C%2FlinearGradient%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22glow%22%20cx%3D%2250%25%22%20cy%3D%2248%25%22%20r%3D%2255%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%220.48%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffffff%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%0A%20%20%20%20%3Cstyle%3E.gold-line%7Bstroke%3A%23ddb622%3Bstroke-width%3A2%3Bfill%3Anone%3Bopacity%3A.5%3Bstroke-linecap%3Around%7D.gold-thin%7Bstroke%3A%23ddb622%3Bstroke-width%3A1.3%3Bfill%3Anone%3Bopacity%3A.25%3Bstroke-linecap%3Around%7D.soft-line%7Bstroke%3A%23fff%3Bstroke-width%3A1.4%3Bfill%3Anone%3Bopacity%3A.18%3Bstroke-linecap%3Around%7D.leaf%7Bstroke%3A%23b98d31%3Bstroke-width%3A2%3Bfill%3Anone%3Bopacity%3A.46%3Bstroke-linecap%3Around%3Bstroke-linejoin%3Around%7D.leaf-fill%7Bfill%3A%23ddb622%3Bopacity%3A.18%7D%3C%2Fstyle%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20width%3D%221920%22%20height%3D%221080%22%20fill%3D%22url%28%23bg%29%22%2F%3E%3Crect%20width%3D%221920%22%20height%3D%221080%22%20fill%3D%22url%28%23glow%29%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%200H1920V100C1720%20188%201500%20178%201310%20105C1115%2030%20950%2048%20770%2098C560%20158%20375%20118%20190%2065C110%2042%2055%2037%200%2042V0Z%22%20fill%3D%22url%28%23purple%29%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%20108C220%20145%20430%20118%20630%2052C818%20-10%20980%20-2%201185%2058C1418%20126%201645%20112%201920%2018V128C1700%20212%201495%20218%201302%20158C1102%2096%20918%20100%20710%20160C498%20222%20288%20218%200%20162V108Z%22%20fill%3D%22%23542a58%22%20opacity%3D%220.34%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%20150C230%20125%20420%2070%20610%2010C480%20110%20320%20190%200%20260V150Z%22%20fill%3D%22url%28%23gold%29%22%20opacity%3D%220.86%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%20250C240%20270%20425%20222%20610%20145C792%2070%20940%2070%201135%20118C1370%20176%201620%20152%201920%2062V185C1702%20268%201488%20280%201278%20224C1052%20164%20858%20172%20652%20245C430%20322%20220%20320%200%20285V250Z%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.28%22%2F%3E%0A%20%20%3Cpath%20class%3D%22gold-line%22%20d%3D%22M0%20330C220%20240%20430%20225%20640%20280C828%20330%20990%20320%201160%20255C1395%20166%201650%20190%201920%20268%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%20875C170%20808%20340%20825%20510%20900C690%20980%20860%20990%201050%20915C1240%20840%201410%20820%201605%20880C1745%20922%201840%20944%201920%20918V1080H0V875Z%22%20fill%3D%22url%28%23purple%29%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%20810C170%20742%20350%20760%20530%20840C705%20918%20880%20928%201070%20858C1265%20786%201435%20782%201620%20850C1755%20900%201858%20918%201920%20900V1080H0V810Z%22%20fill%3D%22%23542a58%22%20opacity%3D%220.18%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%20925C250%20820%20440%20828%20650%20905C845%20976%201030%20970%201222%20890C1438%20800%201665%20782%201920%20842V1080H0V925Z%22%20fill%3D%22url%28%23gold%29%22%20opacity%3D%220.8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%20955C245%20858%20455%20860%20662%20925C858%20986%201045%20978%201252%20900C1462%20820%201688%20805%201920%20860V1080H0V955Z%22%20fill%3D%22%23542a58%22%2F%3E%0A%20%20%3Cpath%20class%3D%22gold-thin%22%20d%3D%22M0%20985C270%20870%20470%20882%20690%20955C890%201022%201085%201015%201290%20930C1500%20842%201705%20842%201920%20925%22%2F%3E%0A%20%20%3Cpath%20class%3D%22gold-thin%22%20d%3D%22M0%201010C280%20892%20490%20906%20710%20978C900%201040%201100%201035%201310%20952C1515%20872%201710%20876%201920%20958%22%2F%3E%0A%20%20%3Cpath%20class%3D%22gold-thin%22%20d%3D%22M0%201034C290%20918%20510%20930%20730%20998C915%201055%201118%201052%201328%20972C1532%20894%201720%20900%201920%20988%22%2F%3E%0A%20%20%3Cpath%20class%3D%22gold-thin%22%20d%3D%22M860%200C1040%2092%201215%20132%201390%20120C1520%20112%201648%2078%201780%2018%22%2F%3E%0A%20%20%3Cpath%20class%3D%22gold-thin%22%20d%3D%22M890%200C1062%2080%201234%20110%201400%2098C1530%2088%201658%2054%201780%200%22%2F%3E%0A%20%20%3Cpath%20class%3D%22soft-line%22%20d%3D%22M250%20690C430%20610%20590%20615%20760%20700C920%20780%201090%20780%201260%20705%22%2F%3E%0A%20%20%3Cg%20transform%3D%22translate%2855%20635%29%22%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M0%20230C48%20158%2096%2082%20145%200%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M34%20170C8%20158%20-4%20128%205%2096C36%20112%2048%20140%2034%20170Z%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M70%20116C48%2092%2048%2060%2070%2035C92%2062%2092%2092%2070%20116Z%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M106%2058C116%2028%20140%2010%20174%2012C164%2044%20140%2062%20106%2058Z%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M88%20142C122%20120%20158%20116%20198%20130C170%20160%20132%20166%2088%20142Z%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M48%20196C84%20176%20120%20174%20158%20192C125%20218%2086%20222%2048%20196Z%22%2F%3E%3Cellipse%20class%3D%22leaf-fill%22%20cx%3D%2244%22%20cy%3D%22128%22%20rx%3D%2215%22%20ry%3D%2242%22%20transform%3D%22rotate%28-18%2044%20128%29%22%2F%3E%3Cellipse%20class%3D%22leaf-fill%22%20cx%3D%22118%22%20cy%3D%2268%22%20rx%3D%2217%22%20ry%3D%2247%22%20transform%3D%22rotate%2855%20118%2068%29%22%2F%3E%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%281545%2050%29%22%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M0%20210C82%20140%20160%2072%20250%200%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M54%20148C18%20158%20-12%20144%20-32%20112C6%20100%2036%20112%2054%20148Z%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M112%2098C76%20108%2048%2094%2030%2062C68%2050%2096%2064%20112%2098Z%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M176%2045C146%2034%20132%2010%20136%20-24C170%20-14%20184%2012%20176%2045Z%22%2F%3E%3Cpath%20class%3D%22leaf%22%20d%3D%22M210%2018C218%20-20%20245%20-42%20286%20-42C274%20-2%20248%2020%20210%2018Z%22%2F%3E%3C%2Fg%3E%0A%3C%2Fsvg%3E");
         background-size: cover;
         background-position: center;
@@ -23,9 +34,10 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: var(--unapi-fonte);
         padding: 20px;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
         position: relative;
       }
 
@@ -33,13 +45,13 @@
       .logo-watermark {
         width: 100%;
         max-width: 900px;
-        height: 330px;
+        height: clamp(150px, 26vh, 300px);
         background-image: url("logo-unapi.png");
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: contain;
         opacity: 0.8; /* Ajustado levemente para o fundo claro */
-        margin-bottom: -15px;
+        margin-bottom: clamp(-12px, -1vh, -4px);
         z-index: 0;
         pointer-events: none;
       }
@@ -80,10 +92,11 @@
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
         border: 1px solid #3d3d3d;
-        transform: scale(1.15);
+        transform: scale(var(--keyboard-scale));
+        will-change: transform;
         transform-origin: top center;
         z-index: 1;
-        margin-bottom: 60px;
+        margin-bottom: 0;
       }
 
       .main-block,
@@ -231,7 +244,8 @@
         gap: 15px;
         width: 100%;
         max-width: 1100px;
-        height: 60px;
+        min-height: 60px;
+        flex-wrap: wrap;
         z-index: 1;
       }
 
@@ -336,6 +350,89 @@
       :-moz-full-screen #btn-fullscreen {
         display: none;
       }
+
+
+      .keyboard-scale-area {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 22px;
+        overflow: visible;
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (max-height: 820px) {
+        body {
+          justify-content: flex-start;
+          padding-top: 12px;
+        }
+
+        .input-container {
+          margin-bottom: 18px;
+        }
+      }
+
+      @media (max-width: 900px) {
+        #controls-wrapper {
+          gap: 10px;
+        }
+
+        .btn-mode,
+        #family-menu button {
+          font-size: 13px;
+          padding: 8px 12px;
+        }
+      }
+
+
+      /* RODAPÉ INSTITUCIONAL */
+      .logos-footer {
+        width: min(100%, 1100px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(14px, 2vw, 28px);
+        padding: 12px 18px;
+        margin-top: 12px;
+        background: rgba(255, 248, 220, 0.86);
+        border: 1px solid rgba(84, 42, 88, 0.16);
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        z-index: 60;
+        position: relative;
+        flex-wrap: wrap;
+      }
+
+      .logos-footer img {
+        max-height: clamp(28px, 4vh, 44px);
+        max-width: 150px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      @media (max-height: 760px) {
+        .logos-footer {
+          padding: 8px 14px;
+          margin-top: 8px;
+        }
+
+        .logos-footer img {
+          max-height: 30px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .logos-footer {
+          gap: 12px;
+        }
+
+        .logos-footer img {
+          max-width: 105px;
+        }
+      }
+
     </style>
   </head>
   <body>
@@ -351,14 +448,7 @@
       />
     </div>
 
-    <div
-      style="
-        margin-bottom: 30px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      "
-    >
+    <div class="keyboard-scale-area">
       <div class="keyboard-board" id="keyboard-container">
         <div class="main-block">
           <div class="row">
@@ -528,10 +618,52 @@
       </div>
     </div>
 
+    <footer class="logos-footer" aria-label="Logos institucionais">
+      <img src="img/ufms.png" alt="UFMS" />
+      <img src="img/unapi.png" alt="UnAPI" />
+      <img src="img/gov-federal.png" alt="Governo Federal" />
+      <img src="img/facom.png" alt="FACOM" />
+      <img src="img/pet-sistemas.png" alt="PET Sistemas" />
+      <img src="img/pet-computacao.png" alt="PET Computação" />
+    </footer>
+
     <script>
       const inputField = document.getElementById("practice-input");
 
-      window.onload = () => inputField.focus();
+      function ajustarEscalaTeclado() {
+        const boardElement = document.getElementById("keyboard-container");
+        const scaleArea = document.querySelector(".keyboard-scale-area");
+        const controlsWrapper = document.getElementById("controls-wrapper");
+        const footer = document.querySelector(".logos-footer");
+
+        if (!boardElement || !scaleArea) return;
+
+        document.documentElement.style.setProperty("--keyboard-scale", 1);
+        scaleArea.style.height = "auto";
+
+        const availableWidth = Math.max(320, window.innerWidth - 40);
+        const footerHeight = footer ? footer.offsetHeight : 0;
+        const controlsHeight = controlsWrapper ? controlsWrapper.offsetHeight : 0;
+        const boardTop = boardElement.getBoundingClientRect().top;
+        const availableHeight = Math.max(
+          260,
+          window.innerHeight - boardTop - controlsHeight - footerHeight - 56,
+        );
+
+        const scaleByWidth = availableWidth / boardElement.offsetWidth;
+        const scaleByHeight = availableHeight / boardElement.offsetHeight;
+        const scale = Math.max(0.52, Math.min(1, scaleByWidth, scaleByHeight));
+
+        document.documentElement.style.setProperty("--keyboard-scale", scale);
+        scaleArea.style.height = boardElement.offsetHeight * scale + "px";
+      }
+
+      window.addEventListener("load", () => {
+        inputField.focus();
+        ajustarEscalaTeclado();
+      });
+
+      window.addEventListener("resize", ajustarEscalaTeclado);
       document.addEventListener("click", (e) => {
         if (
           document.activeElement !== inputField &&
