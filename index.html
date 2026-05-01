@@ -433,9 +433,51 @@
         }
       }
 
+
+
+      /* BOTÃO DE VOLTAR PARA A HOME - REPOSITÓRIOS SEPARADOS */
+      .btn-voltar-home {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 999;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 12px;
+        background: var(--unapi-roxo);
+        color: var(--unapi-fundo);
+        text-decoration: none;
+        font-family: var(--unapi-fonte);
+        font-size: 15px;
+        font-weight: 800;
+        box-shadow: var(--unapi-sombra);
+        border: 1px solid rgba(221, 182, 34, 0.45);
+        transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .btn-voltar-home:hover {
+        background: #6b3b6f;
+        color: var(--unapi-amarelo);
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 720px) {
+        .btn-voltar-home {
+          top: 10px;
+          left: 10px;
+          padding: 8px 12px;
+          font-size: 13px;
+        }
+      }
+
     </style>
   </head>
   <body>
+    <a class="btn-voltar-home" href="https://teoz08.github.io/homeUnapi/">← Home</a>
+
     <div class="logo-watermark"></div>
 
     <div class="input-container">
