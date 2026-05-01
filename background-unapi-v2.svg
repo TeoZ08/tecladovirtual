@@ -1,0 +1,35 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff8dc"/>
+      <stop offset="1" stop-color="#fffdf4"/>
+    </linearGradient>
+    <linearGradient id="purpleGradient" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#542a58"/>
+      <stop offset="1" stop-color="#6b3b6f"/>
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ddb622"/>
+      <stop offset="1" stop-color="#e6c543"/>
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 540) rotate(90) scale(420 760)">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .line-gold { stroke: #ddb622; stroke-width: 2; fill: none; opacity: 0.38; stroke-linecap: round; stroke-linejoin: round; }
+      .line-soft { stroke: #ffffff; stroke-width: 1.4; fill: none; opacity: 0.14; stroke-linecap: round; stroke-linejoin: round; }
+      .leaf { stroke: #542a58; stroke-width: 2; fill: none; opacity: 0.12; stroke-linecap: round; stroke-linejoin: round; }
+      .dot-light { fill: #ffffff; opacity: 0.22; }
+      .dot-purple { fill: #542a58; opacity: 0.12; }
+    </style>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+  <rect width="1920" height="1080" fill="url(#centerGlow)"/>
+  <path d="M0 0H1920V145C1770 210 1625 210 1475 150C1325 90 1190 85 1045 118C890 152 740 125 585 72C422 16 248 20 90 84C60 96 30 105 0 112V0Z" fill="url(#purpleGradient)"/>
+  <path d="M330 0C285 52 220 93 132 125C262 115 370 76 462 0H330Z" fill="url(#goldGradient)"/>
+  <path d="M0 210C170 252 320 224 468 145C614 68 772 72 930 128C1115 194 1282 190 1468 124C1620 70 1765 108 1870 168C1891 180 1908 188 1920 192V245C1772 282 1618 268 1470 206C1315 142 1168 146 1006 210C836 278 654 276 480 222C314 170 160 172 0 238V210Z" fill="#ffffff" opacity="0.34"/>
+  <path d="M0 910C140 852 292 850 450 908C620 970 788 976 964 914C1144 850 1318 846 1498 908C1650 960 1790 980 1920 934V1080H0V910Z" fill="url(#purpleGradient)"/>
+  <path d="M0 838C154 774 314 782 474 856C640 934 810 934 978 868C1146 802 1316 804 1484 876C1638 940 1784 952 1920 900V1080H0V838Z" fill="#542a58" opacity="0.14"/>
+  <path d="M1230 1080C1322 1014 1444 980 1585 988C1720 996 1830 962 1920 896V1080H1230Z" fill="url(#goldGradient)"/>
+</svg>
